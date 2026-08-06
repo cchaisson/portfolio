@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics That Move People — Candra Chaisson-Williams</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #E60023;
+    --dark: #111111;
+    --mid: #333333;
+    --light: #767676;
+    --cream: #FDF8F3;
+    --white: #FFFFFF;
+    --accent: #FFE0E6;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dark);
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid #E8E0D8;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .pinterest-p {
+    width: 36px;
+    height: 36px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'DM Serif Display', serif;
+    letter-spacing: -1px;
+  }
+
+  .board-meta h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+  }
+
+  .board-meta p {
+    font-size: 13px;
+    color: var(--light);
+    margin-top: 2px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .contact-pill {
+    background: var(--dark);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+  }
+
+  .github-pill {
+    background: transparent;
+    color: var(--dark);
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid var(--dark);
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--dark);
+    padding: 80px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: var(--red);
+    border-radius: 50%;
+    opacity: 0.08;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+  }
+
+  .hero h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+
+  .hero h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: #AAAAAA;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* STAT BAR */
+  .stat-bar {
+    background: var(--red);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+    color: white;
+  }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    letter-spacing: -1px;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    opacity: 0.85;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* MASONRY GRID */
+  .grid-section {
+    padding: 56px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #E8E0D8;
+  }
+
+  .masonry {
+    columns: 3;
+    column-gap: 16px;
+  }
+
+  @media (max-width: 900px) { .masonry { columns: 2; } }
+  @media (max-width: 600px) { .masonry { columns: 1; } }
+
+  .pin {
+    break-inside: avoid;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .pin:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+
+  /* PIN TYPES */
+  .pin-visual {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 32px;
+  }
+
+  .pin-body {
+    padding: 20px 24px 24px;
+  }
+
+  .pin-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 8px;
+  }
+
+  .pin-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .pin-desc {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* SPECIFIC PIN VISUALS */
+  .vis-30m {
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+    flex-direction: column;
+  }
+
+  .big-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 72px;
+    color: white;
+    letter-spacing: -3px;
+    line-height: 1;
+  }
+
+  .big-number span {
+    color: var(--red);
+  }
+
+  .big-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+
+  .vis-retailers {
+    background: var(--cream);
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .retailer-chip {
+    background: white;
+    border: 1.5px solid #E8E0D8;
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+    width: 100%;
+    text-align: center;
+  }
+
+  .retailer-chip.active {
+    background: var(--dark);
+    color: white;
+    border-color: var(--dark);
+  }
+
+  .vis-skills {
+    background: linear-gradient(135deg, #E60023 0%, #AD081B 100%);
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .skill-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .skill-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: white;
+    border-radius: 3px;
+  }
+
+  .vis-agent {
+    background: linear-gradient(135deg, #0F0F23 0%, #1A1A3E 100%);
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .agent-node {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 14px;
+    width: 100%;
+  }
+
+  .agent-node-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .agent-node-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .connector {
+    width: 2px;
+    height: 12px;
+    background: rgba(255,255,255,0.2);
+    margin-left: 20px;
+  }
+
+  .vis-quote {
+    background: var(--accent);
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+    padding: 36px;
+  }
+
+  .quote-mark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 72px;
+    color: var(--red);
+    line-height: 0.5;
+    margin-bottom: 20px;
+  }
+
+  .quote-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--dark);
+    line-height: 1.35;
+    letter-spacing: -0.5px;
+  }
+
+  .vis-omni {
+    background: #F0F7FF;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .channel-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .channel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .channel-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mid);
+    width: 90px;
+  }
+
+  .channel-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .channel-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+
+  .vis-duke {
+    background: linear-gradient(135deg, #012169 0%, #003087 100%);
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .duke-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+
+  .duke-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .duke-courses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .duke-chip {
+    background: rgba(255,255,255,0.12);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .vis-simon {
+    background: linear-gradient(135deg, #FFF5E6 0%, #FFE8CC 100%);
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .simon-emoji {
+    font-size: 64px;
+  }
+
+  .simon-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+
+  .simon-sub {
+    font-size: 12px;
+    color: var(--light);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--dark);
+    padding: 48px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .footer p {
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+  }
+
+  .footer strong {
+    color: white;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-link {
+    color: var(--red);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="pinterest-p">P</div>
+    <div class="board-meta">
+      <h1>Analytics That Move People</h1>
+      <p>Candra Chaisson-Williams &nbsp;·&nbsp; Senior Manager, Analytics &amp; Insights</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <a href="https://github.com/cchaisson" class="github-pill">github.com/cchaisson</a>
+    <a href="mailto:chaissoc91@gmail.com" class="contact-pill">chaissoc91@gmail.com</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Portfolio Board</p>
+  <h2>Data doesn't move people.<br><em>Stories do.</em></h2>
+  <p>10+ years turning disparate data sources into insights, tools, and recommendations that change what teams actually do next.</p>
+</div>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat">
+    <span class="stat-number">$30M+</span>
+    <span class="stat-label">Omnichannel YoY Growth Driven</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">300+</span>
+    <span class="stat-label">Stakeholders Served Daily</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">60%</span>
+    <span class="stat-label">Manual Reporting Eliminated</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">10+</span>
+    <span class="stat-label">Years CPG Analytics</span>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="grid-section">
+  <div class="section-label">Selected Work &amp; Thinking</div>
+  <div class="masonry">
+
+    <!-- PIN 1: $30M -->
+    <div class="pin">
+      <div class="pin-visual vis-30m">
+        <div class="big-number"><span>$30</span>M+</div>
+        <div class="big-label">Omnichannel Growth · YoY</div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">Impact</div>
+        <div class="pin-title">Driving $30M in omnichannel growth through category insights</div>
+        <div class="pin-desc">Built the category deep dives, JBP presentations, and omni scorecards that helped Publix, Kroger, ShopRite, and Albertsons teams understand performance and act on growth opportunities across grocery, natural, club, and eCommerce channels.</div>
+      </div>
+    </div>
+
+    <!-- PIN 2: Quote -->
+    <div class="pin">
+      <div class="pin-visual vis-quote" style="min-height: 180px;">
+        <div class="quote-mark">"</div>
+        <div class="quote-text">The best analytics work is invisible to the people it serves. It just changes what they do next.</div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">Philosophy</div>
+        <div class="pin-desc">My approach to building scalable analytics products and foundational datasets that stakeholders actually use.</div>
+      </div>
+    </div>
+
+    <!-- PIN 3: AI Agent -->
+    <div class="pin">
+      <div class="pin-visual vis-agent">
+        <div class="agent-node">
+          <div class="agent-node-title">Snowflake MCP Server</div>
+          <div class="agent-node-desc">Connects AI agents to enterprise data</div>
+        </div>
+        <div class="connector"></div>
+        <div class="agent-node">
+          <div class="agent-node-title">Cortex ANALYST + Search</div>
+          <div class="agent-node-desc">Natural language to SQL · semantic retrieval</div>
+        </div>
+        <div class="connector"></div>
+        <div class="agent-node">
+          <div class="agent-node-title">LangGraph Orchestration</div>
+          <div class="agent-node-desc">Multi-step agent workflows</div>
+        </div>
+        <div class="connector"></div>
+        <div class="agent-node">
+          <div class="agent-node-title">AI Observability</div>
+          <div class="agent-node-desc">Custom metrics · tool selection monitoring</div>
+        </div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">AI Project · 2025</div>
+        <div class="pin-title">Production AI Research Agent</div>
+        <div class="pin-desc">Built an enterprise AI agent using Snowflake's Managed MCP Server to automate business reporting workflows. Analysts focus on storytelling. The agent handles the data assembly.</div>
+      </div>
+    </div>
+
+    <!-- PIN 4: Retailers -->
+    <div class="pin">
+      <div class="pin-visual vis-retailers" style="min-height: 200px;">
+        <div class="retailer-chip active">Publix</div>
+        <div class="retailer-chip active">Kroger</div>
+        <div class="retailer-chip active">ShopRite</div>
+        <div class="retailer-chip active">Albertsons</div>
+        <div class="retailer-chip" style="opacity:0.4;">+ Regional Grocery</div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">Retail Partners</div>
+        <div class="pin-title">Retailer-specific category deep dives that move buyers</div>
+        <div class="pin-desc">Dozens of customized category stories covering promo strategy, SKU rationalization, category trends, and product lifecycle analytics across grocery, natural, and eCommerce channels.</div>
+      </div>
+    </div>
+
+    <!-- PIN 5: Skills -->
+    <div class="pin">
+      <div class="pin-visual vis-skills">
+        <div class="skill-row">
+          <div class="skill-name" style="color:white;font-size:11px;">SQL</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:96%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name" style="color:white;font-size:11px;">Python</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name" style="color:white;font-size:11px;">Tableau</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name" style="color:white;font-size:11px;">LangGraph</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name" style="color:white;font-size:11px;">NielsenIQ</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:94%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name" style="color:white;font-size:11px;">Snowflake</div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div>
+        </div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">Technical Stack</div>
+        <div class="pin-title">Advanced analytics across the full stack</div>
+        <div class="pin-desc">SQL, Python, Tableau, Power BI, NielsenIQ, Circana, Discover, Liquid Data, Snowflake MCP, LangGraph, AWS Bedrock.</div>
+      </div>
+    </div>
+
+    <!-- PIN 6: Omni Channels -->
+    <div class="pin">
+      <div class="pin-visual vis-omni" style="min-height: 200px;">
+        <div class="channel-row">
+          <div class="channel-dot" style="background:#E60023"></div>
+          <div class="channel-name">eCommerce</div>
+          <div class="channel-bar-bg"><div class="channel-bar-fill" style="width:88%;background:#E60023"></div></div>
+        </div>
+        <div class="channel-row">
+          <div class="channel-dot" style="background:#4A90D9"></div>
+          <div class="channel-name">Grocery</div>
+          <div class="channel-bar-bg"><div class="channel-bar-fill" style="width:95%;background:#4A90D9"></div></div>
+        </div>
+        <div class="channel-row">
+          <div class="channel-dot" style="background:#7B68EE"></div>
+          <div class="channel-name">Natural</div>
+          <div class="channel-bar-bg"><div class="channel-bar-fill" style="width:80%;background:#7B68EE"></div></div>
+        </div>
+        <div class="channel-row">
+          <div class="channel-dot" style="background:#20B2AA"></div>
+          <div class="channel-name">Club</div>
+          <div class="channel-bar-bg"><div class="channel-bar-fill" style="width:72%;background:#20B2AA"></div></div>
+        </div>
+        <div class="channel-row">
+          <div class="channel-dot" style="background:#FF8C00"></div>
+          <div class="channel-name">Convenience</div>
+          <div class="channel-bar-bg"><div class="channel-bar-fill" style="width:65%;background:#FF8C00"></div></div>
+        </div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">Omni Scorecard</div>
+        <div class="pin-title">One view across every channel that matters</div>
+        <div class="pin-desc">Built omni scorecards integrating store, eCommerce, digital, and shopper metrics — eliminating fragmented reporting across four systems and reducing manual work by 60%.</div>
+      </div>
+    </div>
+
+    <!-- PIN 7: Duke -->
+    <div class="pin">
+      <div class="pin-visual vis-duke" style="min-height: 220px;">
+        <div class="duke-label">Duke University · Fuqua</div>
+        <div class="duke-degree">M.S. Quantitative Methods<br>&amp; Business Analytics</div>
+        <div class="duke-courses">
+          <span class="duke-chip">Econometrics</span>
+          <span class="duke-chip">Causal Inference</span>
+          <span class="duke-chip">ML Applications</span>
+          <span class="duke-chip">Forecasting</span>
+          <span class="duke-chip">Ensemble Methods</span>
+        </div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">Education · Expected 2027</div>
+        <div class="pin-desc">Building the quantitative foundation to match the analytical intuition built over a decade in CPG. Also completing a Generative AI Bootcamp: RAG, LangGraph, LLM fine-tuning, AWS Bedrock.</div>
+      </div>
+    </div>
+
+    <!-- PIN 8: Simon -->
+    <div class="pin">
+      <div class="pin-visual vis-simon" style="min-height: 180px;">
+        <div class="simon-emoji">🐱</div>
+        <div class="simon-text">Simon eats raw food and kibble.<br>He has opinions about both.</div>
+        <div class="simon-sub">@whateversimon_says</div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">Why This Matters</div>
+        <div class="pin-title">Personal before professional</div>
+        <div class="pin-desc">I think hard about what goes into Simon's food. Fresh, refrigerated, real nutrition — the mission behind this kind of work is personal before it is professional.</div>
+      </div>
+    </div>
+
+    <!-- PIN 9: GitHub -->
+    <div class="pin">
+      <div class="pin-visual" style="background: linear-gradient(135deg, #24292E 0%, #1A1E22 100%); min-height: 160px; flex-direction: column; gap: 12px; align-items: flex-start; padding: 28px;">
+        <div style="font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1.5px; text-transform: uppercase;">github.com/cchaisson</div>
+        <div style="color: white; font-family: 'DM Serif Display', serif; font-size: 18px; line-height: 1.3;">Waze Churn EDA</div>
+        <div style="color: rgba(255,255,255,0.5); font-size: 12px;">NYC Taxi Analysis</div>
+        <div style="color: rgba(255,255,255,0.5); font-size: 12px;">TikTok Claims EDA</div>
+        <div style="background: var(--red); color: white; font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 100px; letter-spacing: 0.5px; margin-top: 4px;">View Portfolio</div>
+      </div>
+      <div class="pin-body">
+        <div class="pin-tag">Code Portfolio</div>
+        <div class="pin-title">Public analytical work on GitHub</div>
+        <div class="pin-desc">Python projects covering churn prediction, EDA, and data preparation — built as part of the Google Advanced Data Analytics Certificate.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>Candra Chaisson-Williams</strong> · Senior Manager, Analytics &amp; Insights</p>
+  <p style="margin-top: 6px;">Houston, TX &nbsp;·&nbsp; Duke MSQM Candidate 2027 &nbsp;·&nbsp; Applying for Senior Business Analyst, Integrated Content Solutions at Pinterest</p>
+  <div class="footer-links">
+    <a href="mailto:chaissoc91@gmail.com" class="footer-link">chaissoc91@gmail.com</a>
+    <a href="https://linkedin.com/in/candrachaisson" class="footer-link">LinkedIn</a>
+    <a href="https://github.com/cchaisson" class="footer-link">GitHub</a>
+    <a href="tel:7043636378" class="footer-link">704.363.6378</a>
+  </div>
+</div>
+
+</body>
+</html>
